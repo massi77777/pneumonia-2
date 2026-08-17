@@ -56,12 +56,12 @@ st.markdown(
         :root {
             --bg: #0b0f17;
             --surface: #121826;
-            --surface-2: #161f30;
-            --border: #232e42;
-            --border-soft: #1c2536;
-            --text-primary: #eef2f8;
-            --text-secondary: #93a1b7;
-            --text-muted: #5f6c81;
+            --surface-2: #1a2436;
+            --border: #2a374d;
+            --border-soft: #212c40;
+            --text-primary: #f7f9fc;
+            --text-secondary: #b7c2d4;
+            --text-muted: #8695ab;
             --accent: #4fd1c5;
             --accent-soft: rgba(79, 209, 197, 0.12);
             --danger: #ff6b6b;
@@ -122,25 +122,27 @@ st.markdown(
         .section-label {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            font-size: 0.72rem;
+            gap: 0.6rem;
+            font-size: 0.82rem;
             font-weight: 700;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.06em;
             text-transform: uppercase;
-            color: var(--text-muted) !important;
+            color: var(--text-secondary) !important;
             margin-bottom: 0.85rem;
         }
         .section-label .num {
-            width: 18px;
-            height: 18px;
+            width: 20px;
+            height: 20px;
             border-radius: 5px;
-            background: var(--surface-2);
-            border: 1px solid var(--border);
+            background: var(--accent-soft);
+            border: 1px solid rgba(79,209,197,0.4);
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.65rem;
+            font-size: 0.7rem;
+            font-weight: 800;
             color: var(--accent) !important;
+            flex-shrink: 0;
         }
 
         /* Card container */
@@ -174,7 +176,32 @@ st.markdown(
         }
         [data-testid="stFileUploaderFile"] {
             background-color: var(--surface-2) !important;
-            border-radius: 8px;
+            border: 1px solid var(--border) !important;
+            border-radius: 10px;
+            padding: 0.5rem 0.7rem;
+        }
+        [data-testid="stFileUploaderFile"] * {
+            color: var(--text-primary) !important;
+        }
+        [data-testid="stFileUploaderFileName"] {
+            color: var(--text-primary) !important;
+            font-weight: 500;
+        }
+        [data-testid="stFileUploaderFile"] small,
+        [data-testid="stFileUploaderFile"] span[class*="fileSize"] {
+            color: var(--text-muted) !important;
+        }
+        [data-testid="stFileUploaderFileIcon"] svg,
+        [data-testid="stFileUploaderFile"] svg {
+            fill: var(--accent) !important;
+            color: var(--accent) !important;
+        }
+        [data-testid="stFileUploaderFile"] [data-testid="stBaseButton-minimal"] {
+            color: var(--text-secondary) !important;
+        }
+        [data-testid="baseButton-minimal"] svg { fill: var(--text-secondary) !important; }
+        [data-testid="stFileUploaderDeleteBtn"] button {
+            color: var(--text-secondary) !important;
         }
 
         /* Result badges */
