@@ -16,73 +16,109 @@ st.set_page_config(page_title="Pneumonia Detector", page_icon="🩺", layout="ce
 st.markdown(
     """
     <style>
-    .stApp{ background-color:#0d0d0d; color:#f5f5f5; }
+    .stApp{ background-color:#0d0d0d; color:#ffffff; }
+
     h1{
-        font-size:3rem !important;
+        font-size:4rem !important;
         font-weight:900 !important;
         text-align:center;
-        background: linear-gradient(90deg,#00ffcc,#ff00c8);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+        color:#00ffcc !important;
+        text-shadow:
+            0 0 10px #00ffcc,
+            0 0 25px #00ffcc,
+            0 0 50px #ff00c8,
+            0 0 80px #ff00c8;
         margin-bottom:0;
+        letter-spacing:2px;
     }
     .subtitle{
         text-align:center;
-        font-size:1.2rem;
-        color:#aaaaaa;
+        font-size:1.6rem;
+        font-weight:700;
+        color:#ffffff !important;
+        text-shadow: 0 0 10px #00ffcc;
         margin-bottom:30px;
     }
+
+    /* Upload box */
     [data-testid="stFileUploaderDropzone"]{
-        background-color:#1a1a1a;
+        background-color:#161616 !important;
         border:3px dashed #00ffcc !important;
         border-radius:16px;
+        padding:20px !important;
     }
-    [data-testid="stFileUploaderDropzone"] *{
-        color:#f5f5f5 !important;
+    [data-testid="stFileUploaderDropzone"] section{
+        background-color:transparent !important;
     }
-    [data-testid="stFileUploaderDropzone"] small{
-        color:#cccccc !important;
+    [data-testid="stFileUploaderDropzone"] div,
+    [data-testid="stFileUploaderDropzone"] span,
+    [data-testid="stFileUploaderDropzone"] small,
+    [data-testid="stFileUploaderDropzone"] p{
+        color:#ffffff !important;
+        font-size:1.15rem !important;
+        font-weight:700 !important;
+        text-shadow: 0 0 8px #00ffcc;
     }
-    [data-testid="stFileUploaderDropzone"] button{
+    [data-testid="stFileUploaderDropzone"] button,
+    [data-testid="baseButton-secondary"]{
         background-color:#00ffcc !important;
         color:#0d0d0d !important;
-        font-weight:800 !important;
+        font-weight:900 !important;
+        font-size:1.1rem !important;
         border:none !important;
+        border-radius:10px !important;
+        box-shadow: 0 0 15px #00ffcc;
+    }
+    [data-testid="stFileUploaderDropzone"] button *{
+        color:#0d0d0d !important;
+        text-shadow:none !important;
+    }
+    svg{ fill:#00ffcc !important; }
+
+    [data-testid="stFileUploadedFile"]{
+        background-color:#161616 !important;
+        border-radius:10px;
     }
     [data-testid="stFileUploadedFile"] *{
-        color:#f5f5f5 !important;
+        color:#ffffff !important;
+        font-weight:700 !important;
     }
-    p, span, label, div{
-        color:#f5f5f5;
-    }
+
     .result{
         text-align:center;
         border-radius:20px;
         padding:30px;
         margin-top:20px;
         font-weight:900;
-        font-size:2.3rem;
+        font-size:3rem;
     }
     .pneumonia{
         background-color:#2a0010;
         color:#ff003c;
         border:3px solid #ff003c;
-        text-shadow: 0 0 12px #ff003c;
+        text-shadow: 0 0 10px #ff003c, 0 0 30px #ff003c, 0 0 60px #ff003c;
     }
     .normal{
         background-color:#00220f;
         color:#00ff88;
         border:3px solid #00ff88;
-        text-shadow: 0 0 12px #00ff88;
+        text-shadow: 0 0 10px #00ff88, 0 0 30px #00ff88, 0 0 60px #00ff88;
     }
     .confidence{
         text-align:center;
-        font-size:1.5rem;
-        font-weight:800;
+        font-size:2rem;
+        font-weight:900;
         color:#ffd400;
-        margin-top:10px;
+        text-shadow: 0 0 10px #ffd400, 0 0 25px #ffd400;
+        margin-top:15px;
     }
-    .stProgress > div > div{ background-color:#ffd400 !important; }
+    .stProgress > div > div{ background-color:#ffd400 !important; box-shadow:0 0 12px #ffd400; }
+
+    .stCaption, [data-testid="stCaptionContainer"] *{
+        color:#dddddd !important;
+        font-size:1rem !important;
+    }
+
     footer{ visibility:hidden; }
     </style>
     """,
