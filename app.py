@@ -51,106 +51,217 @@ st.set_page_config(
 st.markdown(
     """
     <style>
-        /* General */
-        .stApp { background-color: #f7f9fb; }
-        #MainMenu, footer, header { visibility: hidden; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
-        .block-container { padding-top: 2.5rem; max-width: 760px; }
+        :root {
+            --bg: #0b0f17;
+            --surface: #121826;
+            --surface-2: #161f30;
+            --border: #232e42;
+            --border-soft: #1c2536;
+            --text-primary: #eef2f8;
+            --text-secondary: #93a1b7;
+            --text-muted: #5f6c81;
+            --accent: #4fd1c5;
+            --accent-soft: rgba(79, 209, 197, 0.12);
+            --danger: #ff6b6b;
+            --danger-soft: rgba(255, 107, 107, 0.12);
+            --danger-border: rgba(255, 107, 107, 0.35);
+            --success: #37d67a;
+            --success-soft: rgba(55, 214, 122, 0.12);
+            --success-border: rgba(55, 214, 122, 0.35);
+            --warn: #f5b942;
+            --warn-soft: rgba(245, 185, 66, 0.1);
+            --warn-border: rgba(245, 185, 66, 0.3);
+        }
+
+        html, body, .stApp {
+            background-color: var(--bg) !important;
+            font-family: 'Inter', -apple-system, sans-serif;
+        }
+        #MainMenu, footer, header { visibility: hidden; }
+        .block-container { padding-top: 3rem; padding-bottom: 3rem; max-width: 780px; }
+
+        * { color: var(--text-primary); }
 
         /* Header */
         .app-header {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 0.25rem;
+            gap: 0.85rem;
+            margin-bottom: 0.4rem;
         }
-        .app-header .icon {
-            font-size: 2.1rem;
-            line-height: 1;
+        .app-header .icon-wrap {
+            width: 46px;
+            height: 46px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, rgba(79,209,197,0.18), rgba(79,209,197,0.04));
+            border: 1px solid rgba(79,209,197,0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            flex-shrink: 0;
         }
         .app-header h1 {
-            font-size: 1.7rem;
+            font-size: 1.55rem;
             font-weight: 700;
-            color: #10233e;
+            color: var(--text-primary) !important;
             margin: 0;
+            letter-spacing: -0.01em;
         }
         .app-subtitle {
-            color: #5b6b7f;
-            font-size: 0.98rem;
-            margin-bottom: 1.75rem;
+            color: var(--text-secondary) !important;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin: 0.6rem 0 2rem 0;
+            max-width: 560px;
+        }
+
+        /* Section labels */
+        .section-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-muted) !important;
+            margin-bottom: 0.85rem;
+        }
+        .section-label .num {
+            width: 18px;
+            height: 18px;
+            border-radius: 5px;
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.65rem;
+            color: var(--accent) !important;
         }
 
         /* Card container */
         .card {
-            background: #ffffff;
-            border: 1px solid #e6ebf1;
-            border-radius: 14px;
-            padding: 1.6rem 1.6rem 1.4rem 1.6rem;
-            box-shadow: 0 1px 3px rgba(16, 35, 62, 0.04);
-            margin-bottom: 1.4rem;
-        }
-        .card h3 {
-            font-size: 1rem;
-            font-weight: 600;
-            color: #10233e;
-            margin-top: 0;
-            margin-bottom: 0.9rem;
+            background: var(--surface);
+            border: 1px solid var(--border-soft);
+            border-radius: 16px;
+            padding: 1.6rem 1.7rem 1.5rem 1.7rem;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+            margin-bottom: 1.3rem;
         }
 
         /* Uploader */
         [data-testid="stFileUploaderDropzone"] {
-            background-color: #fafbfc;
-            border: 1.5px dashed #c9d4e0;
-            border-radius: 10px;
+            background-color: var(--surface-2) !important;
+            border: 1.5px dashed var(--border) !important;
+            border-radius: 12px !important;
+        }
+        [data-testid="stFileUploaderDropzone"]:hover {
+            border-color: var(--accent) !important;
+        }
+        [data-testid="stFileUploader"] section { color: var(--text-secondary) !important; }
+        [data-testid="stFileUploaderDropzoneInstructions"] span,
+        [data-testid="stFileUploaderDropzoneInstructions"] small {
+            color: var(--text-secondary) !important;
+        }
+        [data-testid="stBaseButton-secondary"] {
+            background-color: var(--surface) !important;
+            border: 1px solid var(--border) !important;
+            color: var(--text-primary) !important;
+        }
+        [data-testid="stFileUploaderFile"] {
+            background-color: var(--surface-2) !important;
+            border-radius: 8px;
         }
 
         /* Result badges */
         .result-badge {
-            display: inline-block;
-            padding: 0.35rem 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.4rem 1rem;
             border-radius: 999px;
             font-weight: 700;
-            font-size: 0.95rem;
-            letter-spacing: 0.02em;
+            font-size: 0.92rem;
+            letter-spacing: 0.01em;
         }
         .badge-pneumonia {
-            background-color: #fdecec;
-            color: #b3261e;
-            border: 1px solid #f6c6c3;
+            background-color: var(--danger-soft);
+            color: var(--danger) !important;
+            border: 1px solid var(--danger-border);
         }
+        .badge-pneumonia * { color: var(--danger) !important; }
         .badge-normal {
-            background-color: #e9f7ee;
-            color: #1e7d38;
-            border: 1px solid #bfe8cc;
+            background-color: var(--success-soft);
+            color: var(--success) !important;
+            border: 1px solid var(--success-border);
         }
+        .badge-normal * { color: var(--success) !important; }
 
         .confidence-label {
-            color: #5b6b7f;
-            font-size: 0.88rem;
-            margin-top: 0.9rem;
-            margin-bottom: 0.25rem;
+            color: var(--text-muted) !important;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-top: 1.3rem;
+            margin-bottom: 0.5rem;
         }
+        .confidence-value {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-primary) !important;
+            margin-top: 0.4rem;
+        }
+
+        /* Progress bar */
+        div[data-testid="stProgress"] > div > div {
+            background-color: var(--surface-2) !important;
+            border-radius: 999px;
+        }
+        div[data-testid="stProgress"] > div > div > div {
+            background: linear-gradient(90deg, var(--accent), #38b2ac) !important;
+            border-radius: 999px;
+        }
+
+        /* Empty state */
+        .empty-state {
+            text-align: center;
+            color: var(--text-muted) !important;
+            padding: 2.2rem 1rem;
+            font-size: 0.9rem;
+        }
+        .empty-state .emoji { font-size: 1.6rem; display: block; margin-bottom: 0.6rem; opacity: 0.6; }
 
         /* Disclaimer */
         .disclaimer {
             display: flex;
-            gap: 0.6rem;
+            gap: 0.65rem;
             align-items: flex-start;
-            background-color: #fff8e6;
-            border: 1px solid #f2e1a8;
-            border-radius: 10px;
-            padding: 0.85rem 1rem;
-            font-size: 0.85rem;
-            color: #7a5c00;
-            margin-top: 1.5rem;
+            background-color: var(--warn-soft);
+            border: 1px solid var(--warn-border);
+            border-radius: 12px;
+            padding: 0.9rem 1.1rem;
+            font-size: 0.83rem;
+            line-height: 1.5;
+            color: #e0c479 !important;
+            margin-top: 1.6rem;
         }
+        .disclaimer * { color: #e0c479 !important; }
+        .disclaimer b { color: #f5d98a !important; }
 
         .footer-note {
             text-align: center;
-            color: #9aa7b6;
-            font-size: 0.78rem;
+            color: var(--text-muted) !important;
+            font-size: 0.76rem;
             margin-top: 1.6rem;
+            letter-spacing: 0.02em;
         }
+
+        img { border-radius: 10px; }
     </style>
     """,
     unsafe_allow_html=True,
@@ -162,7 +273,7 @@ st.markdown(
 st.markdown(
     """
     <div class="app-header">
-        <span class="icon">🩺</span>
+        <div class="icon-wrap">🩺</div>
         <h1>Pneumonia Detection from Chest X-Rays</h1>
     </div>
     <div class="app-subtitle">
@@ -176,11 +287,15 @@ st.markdown(
 # ------------------------------------------------------------------
 # Upload card
 # ------------------------------------------------------------------
-st.markdown('<div class="card"><h3>1. Upload an X-ray image</h3>', unsafe_allow_html=True)
+st.markdown(
+    '<div class="card">'
+    '<div class="section-label"><span class="num">1</span> Upload X-ray image</div>',
+    unsafe_allow_html=True,
+)
 uploaded_file = st.file_uploader(
     "Accepted formats: JPG, PNG",
     type=["jpg", "jpeg", "png"],
-    label_visibility="visible",
+    label_visibility="collapsed",
 )
 st.markdown("</div>", unsafe_allow_html=True)
 
@@ -193,7 +308,11 @@ if uploaded_file is not None:
         image, img_array = prepare_image(uploaded_file)
         result, confidence = predict_image(model, img_array)
 
-    st.markdown('<div class="card"><h3>2. Result</h3>', unsafe_allow_html=True)
+    st.markdown(
+        '<div class="card">'
+        '<div class="section-label"><span class="num">2</span> Analysis result</div>',
+        unsafe_allow_html=True,
+    )
 
     col1, col2 = st.columns([1, 1], gap="large")
     with col1:
@@ -201,24 +320,30 @@ if uploaded_file is not None:
 
     with col2:
         badge_class = "badge-pneumonia" if result == "PNEUMONIA" else "badge-normal"
+        dot = "●"
         label = "Pneumonia detected" if result == "PNEUMONIA" else "Normal"
         st.markdown(
-            f'<span class="result-badge {badge_class}">{label}</span>',
+            f'<span class="result-badge {badge_class}">{dot} {label}</span>',
             unsafe_allow_html=True,
         )
         st.markdown(
-            '<div class="confidence-label">Confidence</div>',
+            '<div class="confidence-label">Model confidence</div>',
             unsafe_allow_html=True,
         )
         st.progress(min(max(confidence, 0.0), 1.0))
-        st.write(f"**{confidence:.1%}**")
+        st.markdown(
+            f'<div class="confidence-value">{confidence:.1%}</div>',
+            unsafe_allow_html=True,
+        )
 
     st.markdown("</div>", unsafe_allow_html=True)
 else:
     st.markdown(
-        '<div class="card" style="text-align:center; color:#9aa7b6;">'
+        '<div class="card">'
+        '<div class="empty-state">'
+        '<span class="emoji">📤</span>'
         "Your result will appear here once you upload an image."
-        "</div>",
+        "</div></div>",
         unsafe_allow_html=True,
     )
 
