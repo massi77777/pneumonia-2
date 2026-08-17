@@ -37,6 +37,24 @@ st.markdown(
         border:3px dashed #00ffcc !important;
         border-radius:16px;
     }
+    [data-testid="stFileUploaderDropzone"] *{
+        color:#f5f5f5 !important;
+    }
+    [data-testid="stFileUploaderDropzone"] small{
+        color:#cccccc !important;
+    }
+    [data-testid="stFileUploaderDropzone"] button{
+        background-color:#00ffcc !important;
+        color:#0d0d0d !important;
+        font-weight:800 !important;
+        border:none !important;
+    }
+    [data-testid="stFileUploadedFile"] *{
+        color:#f5f5f5 !important;
+    }
+    p, span, label, div{
+        color:#f5f5f5;
+    }
     .result{
         text-align:center;
         border-radius:20px;
